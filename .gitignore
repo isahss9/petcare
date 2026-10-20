@@ -46,3 +46,7 @@ app.*.map.json
 
 # Widget Preview related
 .widget_preview/
+
+# Documentação duplicada e arquivo compactado
+petcare_documentacao_entrega.zip
+petcare_documentacao_entrega/

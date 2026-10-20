@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class PetModel {
   final String id;
   final String name;
@@ -13,29 +15,42 @@ class PetModel {
     required this.birthDate,
   });
 
-  /// Cria um PetModel a partir de um mapa de dados.
   factory PetModel.fromMap(Map<String, dynamic> map) {
+    final rawBirthDate = map['birthDate'];
+
+    final DateTime parsedBirthDate;
+
+    if (rawBirthDate is Timestamp) {
+      parsedBirthDate = rawBirthDate.toDate();
+    } else if (rawBirthDate is DateTime) {
+      parsedBirthDate = rawBirthDate;
+    } else if (rawBirthDate is String) {
+      parsedBirthDate = DateTime.parse(rawBirthDate);
+    } else {
+      throw const FormatException(
+        'Data de nascimento inválida no registro do pet.',
+      );
+    }
+
     return PetModel(
       id: map['id'] as String? ?? '',
       name: map['name'] as String? ?? '',
       species: map['species'] as String? ?? '',
       breed: map['breed'] as String? ?? '',
-      birthDate: DateTime.parse(map['birthDate'] as String),
+      birthDate: parsedBirthDate,
     );
   }
 
-  /// Converte o PetModel em um mapa.
   Map<String, dynamic> toMap() {
     return {
       'id': id,
       'name': name,
       'species': species,
       'breed': breed,
-      'birthDate': birthDate.toIso8601String(),
+      'birthDate': Timestamp.fromDate(birthDate),
     };
   }
 
-  /// Cria uma cópia do pet alterando apenas os campos necessários.
   PetModel copyWith({
     String? id,
     String? name,

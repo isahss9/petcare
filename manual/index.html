@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Manual técnico do aplicativo PetCare">
+  <title>PetCare | Manual Técnico</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="container">
+      <p class="eyebrow">DOCUMENTAÇÃO TÉCNICA</p>
+      <h1>PetCare</h1>
+      <p>Aplicativo de gerenciamento de pets e organização de cuidados.</p>
+      <span class="tag">Flutter · Dart · Firebase</span>
+    </div>
+  </header>
+
+  <main class="container layout">
+    <nav class="contents" aria-label="Índice do manual">
+      <strong>Neste manual</strong>
+      <a href="#visao-geral">Visão geral</a>
+      <a href="#tecnologias">Tecnologias</a>
+      <a href="#arquitetura">Arquitetura</a>
+      <a href="#dados">Modelo de dados</a>
+      <a href="#executar">Como executar</a>
+      <a href="#seguranca">Segurança</a>
+      <a href="#validacao">Validação</a>
+    </nav>
+
+    <article class="content">
+      <section id="visao-geral">
+        <h2>1. Visão geral</h2>
+        <p>O PetCare é um projeto escolar desenvolvido em Flutter e Dart para apoiar o cadastro de animais de estimação e a organização de seus cuidados, incluindo vacinas, consultas veterinárias e medicamentos.</p>
+        <div class="note"><strong>Importante:</strong> consulte o código atual para confirmar o comportamento de cada funcionalidade antes de alterar ou ampliar o sistema.</div>
+      </section>
+
+      <section id="tecnologias">
+        <h2>2. Tecnologias</h2>
+        <ul>
+          <li><strong>Flutter/Dart:</strong> interface e lógica do aplicativo.</li>
+          <li><strong>Firebase Authentication:</strong> autenticação de usuários.</li>
+          <li><strong>Cloud Firestore:</strong> banco de dados de documentos.</li>
+          <li><strong>Git/GitHub:</strong> controle de versão e hospedagem do repositório.</li>
+          <li><strong>HTML/CSS:</strong> esta documentação técnica.</li>
+        </ul>
+      </section>
+
+      <section id="arquitetura">
+        <h2>3. Arquitetura do código</h2>
+        <p>O código é organizado por responsabilidade:</p>
+        <dl class="architecture">
+          <div><dt><code>models/</code></dt><dd>Modelos que representam pets e registros de cuidados.</dd></div>
+          <div><dt><code>screens/</code></dt><dd>Telas de autenticação, navegação, agenda, pets e perfil.</dd></div>
+          <div><dt><code>widgets/</code></dt><dd>Componentes visuais reutilizáveis, como cartões de pets.</dd></div>
+          <div><dt><code>services/</code></dt><dd>Serviços de integração, incluindo autenticação.</dd></div>
+          <div><dt><code>repositories/</code></dt><dd>Abstração e acesso aos dados, incluindo implementações Firestore.</dd></div>
+          <div><dt><code>theme/</code></dt><dd>Configuração visual centralizada em <code>app_theme.dart</code>.</dd></div>
+        </dl>
+      </section>
+
+      <section id="dados">
+        <h2>4. Modelo de dados</h2>
+        <p>A organização lógica sugerida para separar os dados de cada usuário é:</p>
+        <pre><code>users/{userId}
+  pets/{petId}
+    careRecords/{careRecordId}</code></pre>
+        <p>Os pets representam os animais cadastrados. Os registros de cuidados representam eventos como vacina, consulta veterinária ou medicamento.</p>
+        <div class="note">Confirme os nomes dos campos e os caminhos usados no código dos repositórios antes de modificar regras ou dados existentes.</div>
+      </section>
+
+      <section id="executar">
+        <h2>5. Como executar</h2>
+        <ol>
+          <li>Instale Flutter SDK e configure um dispositivo ou emulador.</li>
+          <li>Abra um terminal na raiz do projeto.</li>
+          <li>Execute <code>flutter pub get</code>.</li>
+          <li>Confirme a configuração Firebase em <code>lib/firebase_options.dart</code>.</li>
+          <li>Execute <code>flutter analyze</code> para analisar o código.</li>
+          <li>Execute <code>flutter run</code> para iniciar o aplicativo.</li>
+        </ol>
+        <pre><code>flutter pub get
+flutter analyze
+flutter run</code></pre>
+      </section>
+
+      <section id="seguranca">
+        <h2>6. Segurança</h2>
+        <ul>
+          <li>Ative os provedores necessários no Firebase Authentication.</li>
+          <li>Configure regras do Firestore que exijam usuário autenticado.</li>
+          <li>Restrinja a leitura e a escrita aos documentos pertencentes ao usuário autenticado.</li>
+          <li>Não utilize regras públicas de leitura/escrita em um aplicativo real.</li>
+          <li>Não publique senhas, chaves privadas ou credenciais de serviço no repositório.</li>
+        </ul>
+      </section>
+
+      <section id="validacao">
+        <h2>7. Checklist de validação</h2>
+        <ul class="checklist">
+          <li>Cadastro e login funcionam com dados válidos.</li>
+          <li>Logout encerra a sessão e direciona à tela correta.</li>
+          <li>O CRUD de pets persiste os dados.</li>
+          <li>Os registros de cuidados podem ser criados e consultados.</li>
+          <li>Os botões do perfil têm ações claras.</li>
+          <li>A análise estática termina sem problemas.</li>
+        </ul>
+        <p class="muted">Manual técnico do PetCare — Projeto escolar AV1, Ensino Técnico em Informática.</p>
+      </section>
+    </article>
+  </main>
+  <footer><div class="container">PetCare · Documentação técnica</div></footer>
+</body>
+</html>

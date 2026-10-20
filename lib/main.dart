@@ -1,8 +1,15 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
+import 'firebase_options.dart';
+import 'screens/auth/auth_gate.dart';
 import 'theme/app_theme.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
   runApp(const PetCareApp());
 }
 
@@ -15,26 +22,7 @@ class PetCareApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'PetCare',
       theme: AppTheme.lightTheme,
-      home: const PetCareHomePage(),
-    );
-  }
-}
-
-class PetCareHomePage extends StatelessWidget {
-  const PetCareHomePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('PetCare')),
-
-      body: Center(
-        child: Text(
-          'Cuidar também é amar. 🐾',
-          style: Theme.of(context).textTheme.headlineMedium,
-          textAlign: TextAlign.center,
-        ),
-      ),
+      home: AuthGate(),
     );
   }
 }
